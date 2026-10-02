@@ -4,7 +4,7 @@ function Header() {
   return (
     <header className="header">
       <nav className="nav">
-        <a className="logo" href="#top">hamza.</a>
+        <a className="logo" href="#top">hamzazain.</a>
         <div className="navLinks">
 <a href="#about">About</a>
         </div>
