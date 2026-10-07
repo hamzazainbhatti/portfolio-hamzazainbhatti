@@ -1,71 +1,30 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaBehance, FaGithub, FaLinkedinIn } from 'react-icons/fa'
 import './Hero.css'
 
+const NAME = 'hamzazain.'
+
+const SOCIALS = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/hamzazainbhatti/', Icon: FaLinkedinIn },
+  { label: 'GitHub', href: 'https://github.com/hamzazainbhatti/', Icon: FaGithub },
+  { label: 'Behance', href: 'https://www.behance.net/hamzazainbhatti', Icon: FaBehance },
+]
+
 function Hero() {
-  const titleRef = useRef(null)
-  const [titleSize, setTitleSize] = useState(null)
-  const [headerVisible, setHeaderVisible] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setHeaderVisible(window.scrollY > 0)
-    }
-
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useLayoutEffect(() => {
-    const title = titleRef.current
-    if (!title) return undefined
-
-    const updateTitleSize = () => {
-      const baseSize = 100
-      const titleStyles = window.getComputedStyle(title)
-      const canvas = document.createElement('canvas')
-      const context = canvas.getContext('2d')
-      if (!context) return
-
-      context.font = [
-        titleStyles.fontStyle,
-        titleStyles.fontVariant,
-        titleStyles.fontWeight,
-        `${baseSize}px`,
-        titleStyles.fontFamily,
-      ].join(' ')
-
-      const naturalWidth = context.measureText(title.textContent).width
-      const letterSpacing = parseFloat(titleStyles.letterSpacing)
-      const adjustedWidth =
-        naturalWidth +
-        (Number.isFinite(letterSpacing)
-          ? letterSpacing * Math.max(title.textContent.length - 1, 0)
-          : 0)
-      const availableWidth = Math.max(
-        document.documentElement.clientWidth - 270,
-        0,
-      )
-
-      if (adjustedWidth > 0 && availableWidth > 0) {
-        setTitleSize(`${(baseSize * availableWidth) / adjustedWidth}px`)
-      }
-    }
-
-    updateTitleSize()
-    const observer = new ResizeObserver(updateTitleSize)
-    observer.observe(document.documentElement)
-
-    return () => observer.disconnect()
+    const onScroll = () => setHasScrolled(window.scrollY > 0)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
     <section className="hero" id="top" data-header-theme="light">
       <div className="heroFrame">
         <nav
-          className={`heroNav${headerVisible ? ' is-hidden' : ''}`}
+          className={`heroNav${hasScrolled ? ' is-hidden' : ''}`}
           aria-label="Hero navigation"
         >
           <div className="heroNavLinks">
@@ -77,47 +36,14 @@ function Hero() {
         <p className="heroDescriptor">a Frontend Developer.</p>
       </div>
 
-      <h1
-        className="heroTitle heroTitleBottom"
-        style={titleSize ? { fontSize: titleSize } : undefined}
-        aria-hidden="true"
-      >
-        <span className="heroTitleText" ref={titleRef}>
-          hamzazain.
-        </span>
-      </h1>
+      {/* Same name, 3 layers. Their z-index (see CSS) controls the stacking. */}
+      <div className="heroTitle heroTitleMiddle" aria-hidden="true">{NAME}</div>
+      <div className="heroTitle heroTitleBottom" aria-hidden="true">{NAME}</div>
+      <img className="heroShape" src="/30.png" alt="" />
+      <h1 className="heroTitle heroTitleTop">{NAME}</h1>
 
-      <h1
-        className="heroTitle heroTitleMiddle"
-        style={titleSize ? { fontSize: titleSize } : undefined}
-        aria-hidden="true"
-      >
-        <span className="heroTitleText">hamzazain.</span>
-      </h1>
-
-      <div className="heroImageLayer">
-        <img
-          className="heroShape"
-          src="/30.png"
-          alt=""
-          aria-hidden="true"
-        />
-      </div>
-
-      <h1
-        className="heroTitle heroTitleTop"
-        style={titleSize ? { fontSize: titleSize } : undefined}
-        aria-label="hamzazain."
-      >
-        <span className="heroTitleText">hamzazain.</span>
-      </h1>
-
-      <div className="scroll">
-        <svg
-          className="scrollArrow"
-          viewBox="0 0 40 40"
-          aria-hidden="true"
-        >
+      <div className="scroll" aria-hidden="true">
+        <svg className="scrollArrow" viewBox="0 0 40 40">
           <g className="arrowDrop">
             <path className="arrowCurve" d="M4 6 L17 19 Q20 22 23 19 L36 6" />
           </g>
@@ -125,32 +51,12 @@ function Hero() {
       </div>
 
       <nav className="heroSocials" aria-label="Social links">
-        <a
-          href="https://www.linkedin.com/in/hamzazainbhatti/"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="LinkedIn"
-        >
-          <FaLinkedinIn aria-hidden="true" />
-        </a>
-        <a
-          href="https://github.com/hamzazainbhatti/"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="GitHub"
-        >
-          <FaGithub aria-hidden="true" />
-        </a>
-        <a
-          href="https://www.behance.net/hamzazainbhatti"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Behance"
-        >
-          <FaBehance aria-hidden="true" />
-        </a>
+        {SOCIALS.map(({ label, href, Icon }) => (
+          <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label}>
+            <Icon aria-hidden="true" />
+          </a>
+        ))}
       </nav>
-
     </section>
   )
 }
