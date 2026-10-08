@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { FaBehance, FaGithub, FaLinkedinIn } from 'react-icons/fa'
 import './Hero.css'
 
-const NAME = 'hamzazain.'
+const NAME = 'hamzazain'
 
 const SOCIALS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/hamzazainbhatti/', Icon: FaLinkedinIn },
@@ -30,6 +30,7 @@ function Hero() {
           <div className="heroNavLinks">
 <a href="#about">About</a>
           </div>
+          <a className="heroNavBrand" href="#top">hamzazain.</a>
           <a href="#contact">Contact</a>
         </nav>
 
