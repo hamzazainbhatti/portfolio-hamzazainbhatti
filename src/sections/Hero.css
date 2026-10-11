@@ -8,7 +8,7 @@
 
   /* Font-specific multiplier for title-size calibration. */
   --title-ratio: 1.03;
-  --title-optical-offset: -0.03em;
+  --title-optical-offset: -0.0299em;
 
   position: relative;
   height: 100vh;
@@ -25,9 +25,8 @@
   border-radius: 24px;
   background: #f0f0f0;
   outline: 1px solid #353535;
-  box-shadow: 18px 18px 28px 8px rgba(0, 0, 0, 0.43);
+  box-shadow: 18px 18px 28px 8px rgba(0, 0, 0, 0.3);
 }
-
 /* ---------- Nav + descriptor inside the window ---------- */
 
 .heroNav {
@@ -138,8 +137,8 @@ a.heroNavBrand {
 .heroShape {
   position: absolute;
   z-index: 5;
-  top: calc(50% - 30px);
-  left: calc(50% - 50px);
+  top: 46%;
+  left: 50%;
   width: min(58vw, 620px);
   height: auto;
   opacity: 0.9;
