@@ -3,6 +3,17 @@ import { FaBehance, FaGithub, FaLinkedinIn } from 'react-icons/fa'
 import './Hero.css'
 
 const NAME = 'hamzazain'
+const NAME_PARTS = ['cherry', 'cream', 'soda']
+
+function HeroTitleText() {
+  return (
+    <span className="heroTitleText">
+      {NAME_PARTS.map((part) => (
+        <span key={part} className="heroTitleWord">{part}</span>
+      ))}
+    </span>
+  )
+}
 
 const SOCIALS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/hamzazainbhatti/', Icon: FaLinkedinIn },
@@ -12,16 +23,32 @@ const SOCIALS = [
 
 function Hero() {
   const [hasScrolled, setHasScrolled] = useState(false)
+  const [isPortraitViewport, setIsPortraitViewport] = useState(
+    () => window.innerWidth < window.innerHeight,
+  )
 
   useEffect(() => {
     const onScroll = () => setHasScrolled(window.scrollY > 0)
+    const onResize = () => {
+      setIsPortraitViewport(window.innerWidth < window.innerHeight)
+    }
+
     onScroll()
+    onResize()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onResize)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onResize)
+    }
   }, [])
 
   return (
-    <section className="hero" id="top" data-header-theme="light">
+    <section
+      className={`hero${isPortraitViewport ? ' is-portrait-viewport' : ''}`}
+      id="top"
+      data-header-theme="light"
+    >
       <div className="heroFrame">
         <nav
           className={`heroNav${hasScrolled ? ' is-hidden' : ''}`}
@@ -34,19 +61,23 @@ function Hero() {
           <a href="#contact">Contact</a>
         </nav>
 
-        <p className="heroDescriptor">a Frontend Developer.</p>
+        <p className="heroStatement">
+          <span className="heroStatementLead">A frontend developer</span>
+          bringing style to the surface, precision to the codebase, and life to every
+          micro-interaction.
+        </p>
       </div>
 
       {/* Same name, 3 layers. Their z-index (see CSS) controls the stacking. */}
       <div className="heroTitle heroTitleMiddle" aria-hidden="true">
-        <span className="heroTitleText">{NAME}</span>
+        <HeroTitleText />
       </div>
       <div className="heroTitle heroTitleBottom" aria-hidden="true">
-        <span className="heroTitleText">{NAME}</span>
+        <HeroTitleText />
       </div>
       <img className="heroShape" src="/30.png" alt="" />
-      <h1 className="heroTitle heroTitleTop">
-        <span className="heroTitleText">{NAME}</span>
+      <h1 className="heroTitle heroTitleTop" aria-label={NAME}>
+        <HeroTitleText />
       </h1>
 
       <div className="scroll" aria-hidden="true">

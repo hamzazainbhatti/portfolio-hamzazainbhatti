@@ -70,14 +70,23 @@ a.heroNavBrand {
   transform: translate(-50%, -50%);
 }
 
-.heroDescriptor {
+.heroStatement {
   position: absolute;
-  right: 24px;
-  bottom: 170px;
+  bottom: 110px;
+  left: 24px;
+  width: 400px;
+  margin: 0;
   color: #444;
-  font-size: 60px;
+  font-size: clamp(20px, 1.6vw, 30px);
   font-weight: 300;
-  line-height: 1;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.heroStatementLead {
+  display: inline;
+  margin-right: 0.25em;
+  font-size: 1.5em;
 }
 
 /* ---------- The big name: 3 layers + the shape ---------- */
@@ -105,6 +114,10 @@ a.heroNavBrand {
 .heroTitleText {
   position: relative;
   left: var(--title-optical-offset);
+}
+
+.heroTitleWord {
+  display: inline;
 }
 
 /* back: dark grey, shows inside the window */
@@ -137,20 +150,20 @@ a.heroNavBrand {
 .heroShape {
   position: absolute;
   z-index: 5;
-  top: 46%;
+  top: 15px;
   left: 50%;
-  width: min(58vw, 620px);
+  width: min(60vw, 620px);
   height: auto;
   opacity: 0.9;
   pointer-events: none;
-  transform: translate(-50%, -50%) rotate(-8deg);
+  transform: translateX(-50%) rotate(-8deg);
 }
 
 /* front: outline only */
 .heroTitleTop {
   z-index: 6;
   color: transparent;
-  -webkit-text-stroke: 2px #f0f0f0;
+  -webkit-text-stroke: 0.006em #f0f0f0;
 }
 
 /* ---------- Scroll arrow ---------- */
@@ -265,14 +278,52 @@ a.heroNavBrand {
 
 @media (max-width: 700px) {
   .hero {
+    --mobile-shape-top: 60px;
+    --mobile-shape-width: min(82vw, 460px);
     --frame-left: 40px;
     --frame-right: 40px;
     --frame-bottom: 40px;
   }
 
   .heroShape {
-    width: min(82vw, 440px);
+    width: var(--mobile-shape-width);
+    top: var(--mobile-shape-top);
   }
+
+  .heroTitle {
+    padding-bottom: 0;
+  }
+
+  .heroStatement {
+    top: calc(
+      var(--mobile-shape-top) + var(--mobile-shape-width) + 48px - var(--frame-top)
+    );
+    bottom: auto;
+    left: 16px;
+    width: calc(100% - 32px);
+    font-size: 18px;
+  }
+
+  .heroNavBrand {
+    display: none;
+  }
+}
+
+.hero.is-portrait-viewport .heroTitleText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero.is-portrait-viewport .heroTitle {
+  align-items: flex-start;
+  padding-top: 90px;
+  font-size: calc(28.5vw * var(--title-ratio));
+  line-height: 0.6;
+}
+
+.hero.is-portrait-viewport .heroTitleWord {
+  display: block;
 }
 
 @media (prefers-reduced-motion: reduce) {
