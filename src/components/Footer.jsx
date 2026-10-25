@@ -1,11 +1,12 @@
 import './Footer.css'
+import { LOGO, NAV_LINKS } from '../data/navigation'
 
 function Footer() {
   return (
     <footer className="siteFooter">
       <div className="footerTop">
         <div className="footerBrand footerSection">
-          <a className="footerLogo" href="#top">hamzazain</a>
+          <a className="footerLogo" href="#top">{LOGO}</a>
           <p>
             A frontend developer creating thoughtful, polished digital
             experiences.
@@ -14,8 +15,9 @@ function Footer() {
 
         <nav className="footerSection" aria-label="Footer navigation">
           <h2>Navigation</h2>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+          {NAV_LINKS.map(({ label, href }) => (
+            <a key={label} href={href}>{label}</a>
+          ))}
         </nav>
 
         <nav className="footerSection" aria-label="Social links">
@@ -45,7 +47,7 @@ function Footer() {
       </div>
 
       <div className="footerBottom">
-        <p>© {new Date().getFullYear()} hamzazain. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} {LOGO}. All rights reserved.</p>
         <p>Built with 🤍 by yours truly.</p>
       </div>
     </footer>

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { FaBehance, FaGithub, FaLinkedinIn } from 'react-icons/fa'
+import Navbar from '../components/Navbar'
 import './Hero.css'
 
-const NAME = 'hamzazain'
-const NAME_PARTS = ['hamzazain']
+const NAME = 'hamzazainbhatti'
+const NAME_PARTS = ['hamza', 'zain', 'bhatti']
 
 function HeroTitleText() {
   return (
@@ -50,16 +51,7 @@ function Hero() {
       data-header-theme="light"
     >
       <div className="heroFrame">
-        <nav
-          className={`heroNav${hasScrolled ? ' is-hidden' : ''}`}
-          aria-label="Hero navigation"
-        >
-          <div className="heroNavLinks">
-            <a href="#about">About</a>
-          </div>
-          <a className="heroNavBrand" href="#top">hamzazain</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        <Navbar variant="hero" isHidden={hasScrolled} />
 
         <p className="heroStatement">
           <span className="heroStatementLead">A frontend developer</span>
