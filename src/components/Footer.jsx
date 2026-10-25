@@ -5,7 +5,7 @@ function Footer() {
     <footer className="siteFooter">
       <div className="footerTop">
         <div className="footerBrand footerSection">
-          <a className="footerLogo" href="#top">hamzazain.</a>
+          <a className="footerLogo" href="#top">hamzazain</a>
           <p>
             A frontend developer creating thoughtful, polished digital
             experiences.
@@ -14,7 +14,7 @@ function Footer() {
 
         <nav className="footerSection" aria-label="Footer navigation">
           <h2>Navigation</h2>
-<a href="#about">About</a>
+          <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
 

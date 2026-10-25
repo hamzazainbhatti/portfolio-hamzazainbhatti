@@ -3,7 +3,7 @@ import { FaBehance, FaGithub, FaLinkedinIn } from 'react-icons/fa'
 import './Hero.css'
 
 const NAME = 'hamzazain'
-const NAME_PARTS = ['cherry', 'cream', 'soda']
+const NAME_PARTS = ['hamzazain']
 
 function HeroTitleText() {
   return (
@@ -55,9 +55,9 @@ function Hero() {
           aria-label="Hero navigation"
         >
           <div className="heroNavLinks">
-<a href="#about">About</a>
+            <a href="#about">About</a>
           </div>
-          <a className="heroNavBrand" href="#top">hamzazain.</a>
+          <a className="heroNavBrand" href="#top">hamzazain</a>
           <a href="#contact">Contact</a>
         </nav>
 

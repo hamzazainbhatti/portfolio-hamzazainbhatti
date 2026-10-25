@@ -32,9 +32,9 @@ function Header() {
       }`}
     >
       <nav className="nav">
-        <a className="logo" href="#top">hamzazain.</a>
+        <a className="logo" href="#top">hamzazain</a>
         <div className="navLinks">
-<a href="#about">About</a>
+          <a href="#about">About</a>
         </div>
       </nav>
       <div className="ctaBox">
